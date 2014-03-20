@@ -1,0 +1,32 @@
+!!! 5
+html(ng-app)
+  head
+    title Sample MEAN Blog
+    link(rel='stylesheet', href='/css/style.css')
+
+    script(type="text/javascript")
+      var allSnippets = !{JSON.stringify(allSnippets)};
+    script(type='text/javascript', src='//ajax.googleapis.com/ajax/libs/angularjs/1.0.3/angular.min.js')
+    script(type="text/javascript", src="/js/app.js")
+
+  body
+
+    div.snippets(ng-controller="Controllers.Snippets")
+      div.snippet-preview(ng-repeat="snippet in snippets",ng-click="showsnippet(snippet)")
+        h2 {{snippet.title}}
+        p {{snippet.date | date:'shortDate'}} by {{snippet.author}}
+        div(ng-hide="!snippet.show") {{snippet.content}}
+
+    div.new-snippet(ng-controller="Controllers.NewSnippet")
+      h2 New Snippet
+      input(type="text",placeholder="Title",ng-model="title")
+      input(type="text",placeholder="Author",ng-model="author")
+      br
+      br
+      b Content
+      br
+      textarea(ng-model="content")
+      hr
+      button(ng-click="submit()") Submit
+
+    
